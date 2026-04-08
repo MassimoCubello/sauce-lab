@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SauceLab</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SauceLab</h1>
+            <p>A Personal Hot Sauce Recipe Tracker</p>
+        </header>
+
+        <div class="helper-section">
+            <p><strong>How does SauceLab work?</strong> SauceLab organizes, stores, and helps you perfect your homemade hot sauce recipes. Track ingredients, monitor heat levels, and leave notes all in one place.</p>
+            <p><strong>How to use:</strong> Fill in the recipe details below. Required fields are marked with an asterisk (*). You can save your recipe as "Work in Progress" and come back to perfect it later.</p>
+        </div>
+
+        <main>
+            <!-- Add/Edit Recipe Section -->
+            <section class="recipe-form-section">
+                <h2>Submit/View Recipe</h2>
+                <form id="recipeForm" class="recipe-form">
+                    <div class="form-group">
+                        <label for="recipeName">Recipe Name *</label>
+                        <input type="text" id="recipeName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pepperType">Primary Pepper Type *</label>
+                            <select id="pepperType" required>
+                                <option value="">Select Pepper Type</option>
+                                <option value="ancho">Ancho</option>
+                                <option value="carolina-reaper">Carolina Reaper</option>
+                                <option value="cayenne">Cayenne</option>
+                                <option value="chipotle">Chipotle</option>
+                                <option value="ghost">Ghost</option>
+                                <option value="habanero">Habanero</option>
+                                <option value="jalapeño">Jalapeño</option>
+                                <option value="peri-peri">Peri Peri</option>
+                                <option value="poblano">Poblano</option>
+                                <option value="red-chili">Red Chili</option>
+                                <option value="red-savina">Red Savina</option>
+                                <option value="scotch-bonnet">Scotch Bonnet</option>
+                                <option value="serrano">Serrano</option>
+                                <option value="tabasco">Tabasco</option>
+                                <option value="thai-chili">Thai Chili</option>
+                                <option value="mixed">Mixed (include in notes)</option>
+                                <option value="other">Other (include in notes)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="heatRating">Heat Rating (1-10) *</label>
+                            <input type="number" id="heatRating" min="1" max="10" required>
+                            <small class="helper-text">1 = Mild, 10 = Extreme Heat</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipeStatus">Status</label>
+                            <select id="recipeStatus">
+                                <option value="work-in-progress">Work in Progress</option>
+                                <option value="perfected">Perfected Recipe</option>
+                            </select>
+                            <small class="helper-text">"Work in Progress" = you're still experimenting. "Perfected Recipe" = you've nailed the recipe!</small>
+                        </div>
+                    </div>
+
+                        <div class="form-group">
+                            <label for="ingredients">Ingredients *</label>
+                            <textarea id="ingredients" rows="4" placeholder="List all ingredients and quantities..." required></textarea>
+                            <small class="helper-text">E.g., "10 jalapeño peppers, 2 clove of garlic, 3/4 cup of vinegar...")</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instructions">Instructions</label>
+                            <textarea id="instructions" rows="4" placeholder="Step-by-step cooking instructions..."></textarea>
+                            <small class="helper-text">Provide detailed steps for making this sauce</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Notes & Feedback</label>
+                            <textarea id="notes" rows="3" placeholder="Personal notes, feedback, who liked it, when you made it..."></textarea>
+                            <small class="helper-text">Add any additional comments or feedback about this recipe</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" id="submitBtn">Add Recipe</button>
+                            <button type="button" id="cancelBtn" style="display: none;">Cancel</button>
+                        </div>
+                </form>
+            </section>
+            
+            <!-- Filters and Search Section -->
+             <section class="filters-section">
+                <h2>Your Recipes</h2>
+                <div class="filters-container">
+                    <div class="search-group">
+                        <input type="text" id="searchInput" placeholder="Search recipes...">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="pepperFilter">
+                            <option value="">All Pepper Types</option>
+                            <option value="ancho">Ancho</option>
+                            <option value="carolina-reaper">Carolina Reaper</option>
+                            <option value="cayenne">Cayenne</option>
+                            <option value="chipotle">Chipotle</option>
+                            <option value="ghost">Ghost</option>
+                            <option value="habanero">Habanero</option>
+                            <option value="jalapeño">Jalapeño</option>
+                            <option value="peri-peri">Peri Peri</option>
+                            <option value="poblano">Poblano</option>
+                            <option value="red-chili">Red Chili</option>
+                            <option value="red-savina">Red Savina</option>
+                            <option value="scotch-bonnet">Scotch Bonnet</option>
+                            <option value="serrano">Serrano</option>
+                            <option value="tabasco">Tabasco</option>
+                            <option value="thai-chili">Thai Chili</option>
+                            <option value="mixed">Mixed</option>
+                            <option value="other">Other</option>
+                        </select>
+                        
+                        <select id="heatFilter">
+                            <option value="">All Heat Levels</option>
+                            <option value="1-3">Mild (1-3)</option>
+                            <option value="4-6">Medium (4-6)</option>
+                            <option value="7-8">Hot (7-8)</option>
+                            <option value="9-10">Extreme (9-10)</option>
+                        </select>
+                        
+                        <select id="statusFilter">
+                            <option value="">All Recipes</option>
+                            <option value="perfected">Perfected</option>
+                            <option value="work-in-progress">Work in Progress</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sort-group">
+                        <select id="sortBy">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="name-asc">Name A-Z</option>
+                            <option value="name-desc">Name Z-A</option>
+                            <option value="heat-desc">Hottest First</option>
+                            <option value="heat-asc">Mildest First</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recipe Cards -->
+            <section class="recipes-section">
+                <div id="recipesList" class="recipes-list">
+                    <!-- Recipes will be dynamically populated here -->
+                </div>
+                <div id="noRecipes" class="no-recipes">
+                    <i class="noRecipes"></i>
+                    <h3>No recipes yet!</h3>
+                    <p>Start by adding your first hot sauce recipe above.</p>
+                </div>
+            </section>
+        </main>
+
+        <div class="footer"></div>
+            <footer>
+                <p>&copy; 2025 SauceLab. Created and built by Massimo Cubello. All rights reserved.</p>
+            </footer>
+    </div>
+    
+</body>
+</html>
